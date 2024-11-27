@@ -13,7 +13,7 @@ RUN dotnet restore
 
 RUN dotnet tool install --global dotnet-ef --version 8.0.0
 
-RUN dotnet ef database update --project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+RUN dotnet ef database update --project /VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
 RUN dotnet --list-sdks
 
