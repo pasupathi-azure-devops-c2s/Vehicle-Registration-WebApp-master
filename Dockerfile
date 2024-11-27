@@ -4,16 +4,23 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the project files into the container
-COPY . ./
+# Copy only the necessary project files to optimize build layers
+COPY VehicleRegistrationWebApp/*.csproj ./VehicleRegistrationWebApp/
+COPY VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj ./  
 
 # Restore the application dependencies
 RUN dotnet restore
 
-# Apply database migrations
-RUN dotnet ef database update
+# Install EF tools locally to the project directory
+RUN dotnet tool install dotnet-ef --local
 
-# Build the application
+# Copy the rest of the application files into the container
+COPY . ./
+
+# Apply database migrations using the locally installed EF tool
+RUN ./dotnet-tools/.store/dotnet-ef/8.0.0/tools/net8.0/dotnet-ef database update --project /app/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj
+
+# Build the application in Release mode
 RUN dotnet build -c Release
 
 # Expose the port that the application will run on
