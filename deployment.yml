@@ -5,7 +5,7 @@ metadata:
 spec: 
   replicas: 1
   selector: 
-    marchLabels: 
+    matchLabels:   # Corrected this field from marchLabels to matchLabels
       app: vehicle-web-app
   template:
     metadata:
@@ -15,10 +15,11 @@ spec:
       containers:
         - name: vehicle-web-app
           image: akscr01sample.azurecr.io/vehicle-web-app:latest
-          port:
-          - containet_port: 7066
+          ports:         # Corrected this field from 'port' to 'ports'
+            - containerPort: 7066    # Corrected from 'containet_port' to 'containerPort'
       imagePullSecrets:
         - name: acr-secret
+
 ---
 
 apiVersion: v1
