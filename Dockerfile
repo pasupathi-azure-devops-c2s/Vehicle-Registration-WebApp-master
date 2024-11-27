@@ -16,11 +16,14 @@ RUN dotnet restore
 
 RUN dotnet tool install --global dotnet-ef --version 8.0.0
 
-RUN cd VehicleRegistration.WebAPI
-
+# Set the working directory to VehicleRegistration.WebAPI and apply database migrations
+WORKDIR /app/VehicleRegistration.WebAPI
 RUN dotnet ef database update
 
-RUN cd ..
+# Set the working directory back to /app and copy the rest of the application files into the container
+WORKDIR /app
+COPY . .
+
 # Copy the rest of the application files into the container
 COPY . .
 
