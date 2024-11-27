@@ -10,7 +10,7 @@ Project Deployment commands:
 
     az login (if needed)
 
-    az login acr --name akscr01sample
+    az acr login --name akscr01sample
 
     docker tag vehicle-web-app:latest akscr01sample.azurecr.io/vehicle-web-app:latest
 
