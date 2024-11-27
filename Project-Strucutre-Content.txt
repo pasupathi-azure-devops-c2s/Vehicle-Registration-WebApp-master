@@ -1,0 +1,66 @@
+Vehicle Registration Web Application
+|
+|-- VehicleRegistration.Core
+    |-- bin
+    |-- interfaces
+    |-- obj
+    |-- Services
+    |VehicleRegistration.Core.csproj
+
+|-- VehicleRegistration.Infrastructure
+    |-- Database
+    |--  Migrations
+    |-- obj
+    |ApplicationsDbContext.cs
+    |VehicleRegistration.Infrastructure.csproj
+
+|-- VehicleRegistration.Manager
+    |-- bin
+    |-- ManagerModels
+    |-- obj
+    |IUserManager.cs
+    |IVehicleManager.cs
+    |UserManager.cs
+    |VehicleManager.cs
+    |VehicleRegistration.Manager.csproj
+
+|-- VehicleRegistration.WebAPI
+    |-- bin
+    |-- Controllers
+    |-- Logs
+    |-- Middleware
+    |-- obj
+    |-- Properties
+    |appsettings.Development.json
+    |appsettings.json
+    |Program.cs
+    |VehicleRegistration.WebAPI.csproj
+    |VehicleRegistration.WebAPI.csproj.UserManager
+    |VehicleRegistration.WebAPI.http
+
+|-- VehicleRegistration.AppTest
+    |-- bin
+    |-- obj
+    |VehicleRegistrationAppTest.csproj
+    |VehicleServiceTest.cs
+
+|-- VehicleRegistration.WebApp
+    |-- bin
+    |-- Controllers
+    |-- Filters
+    |-- Models
+    |-- obj
+    |-- Properties
+    |-- Services
+    |-- Views
+    |-- wwwroot
+    |appsettings.Development.json
+    |appsettings.json
+    |Program.cs
+    |VehicleRegistrationWebApp.csproj
+    |VehicleRegistrationWebApp.csproj.user
+    
+|Dockerfile
+|application.yml #Application Manifest file
+|README.md
+|VehicleRegisrtationAppSolution.sln
