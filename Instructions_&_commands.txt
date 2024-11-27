@@ -1,0 +1,4 @@
+git clone https://github.com/pasupathi-azure-devops-c2s/Vehicle-Registration-WebApp-master.git
+
+cd Vehicle-Registration-WebApp-master
+

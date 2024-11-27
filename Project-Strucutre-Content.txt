@@ -59,8 +59,10 @@ Vehicle Registration Web Application
     |Program.cs
     |VehicleRegistrationWebApp.csproj
     |VehicleRegistrationWebApp.csproj.user
-    
+
 |Dockerfile
 |application.yml #Application Manifest file
 |README.md
 |VehicleRegisrtationAppSolution.sln
+
+EXPOSE 7066
