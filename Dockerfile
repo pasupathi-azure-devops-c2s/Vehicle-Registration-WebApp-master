@@ -4,39 +4,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the solution file and restore any dependencies (via NuGet)
+# Copy the project files into the container
 COPY . ./
 
-
-# Restore dependencies for both WebApp and Infrastructure (if needed)
+# Restore the application dependencies
 RUN dotnet restore
 
-RUN dotnet tool install --global dotnet-ef --version 8.0.0
+# Apply database migrations
+RUN dotnet ef database update
 
-RUN dotnet --list-sdks
+# Build the application
+RUN dotnet build -c Release
 
-RUN dotnet tool list --global
-
-RUN dotnet ef database update --project /VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
-
-
-
-# Copy the rest of the application files into the container
-COPY . .
-
-# Publish the app to the /out directory
-RUN dotnet publish VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj -c Release -o /out
-
-# Define the base image to run the app from
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the published files from the build container
-COPY --from=build /out .
-
-# Expose the port the app will run on (optional, adjust if needed)
+# Expose the port that the application will run on
 EXPOSE 7066
 
 # Set the entry point for the container to run the web application
