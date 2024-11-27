@@ -11,6 +11,13 @@ COPY . ./
 # Restore dependencies for both WebApp and Infrastructure (if needed)
 RUN dotnet restore
 
+RUN dotnet tool install --global dotnet-ef --version 8.0.0
+
+RUN dotnet ef database update --project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+
+RUN dotnet --list-sdks
+
+RUN dotnet tool list --global
 
 # Set the working directory to VehicleRegistration.WebAPI and apply database migrations
 #WORKDIR /app/VehicleRegistration.WebAPI
