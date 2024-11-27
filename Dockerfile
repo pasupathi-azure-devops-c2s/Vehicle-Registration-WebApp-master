@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the solution file and restore any dependencies (via NuGet)
-COPY VehicleRegistrationAppSolution.sln ./
+COPY . ./
 
 # Copy the necessary project files (WebApp, Infrastructure, etc.)
-COPY VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj ./VehicleRegistrationWebApp/
-COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj ./VehicleRegistration.Infrastructure/
+#COPY VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj ./VehicleRegistrationWebApp/
+#COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj ./VehicleRegistration.Infrastructure/
 
 # Restore dependencies for both WebApp and Infrastructure (if needed)
 RUN dotnet restore
