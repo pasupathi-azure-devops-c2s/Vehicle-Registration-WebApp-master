@@ -14,6 +14,9 @@ COPY . ./
 # Restore dependencies for both WebApp and Infrastructure (if needed)
 RUN dotnet restore
 
+RUN dotnet tool install --global dotnet-ef --version 9.0.0
+
+RUN dotnet ef database update
 # Copy the rest of the application files into the container
 COPY . .
 
