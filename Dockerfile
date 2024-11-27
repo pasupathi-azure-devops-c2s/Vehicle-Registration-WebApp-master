@@ -10,7 +10,7 @@ COPY . ./
 RUN dotnet restore
 
 # Install the Entity Framework Core tools globally
-RUN dotnet tool install --global dotnet-ef --version 8.0.0
+RUN dotnet tool install --global dotnet-ef --version 9.0.0
 
 # Add the .NET tools to the PATH
 ENV PATH="$PATH:/root/.dotnet/tools"
