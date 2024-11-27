@@ -11,7 +11,6 @@ COPY . ./
 # Restore dependencies for both WebApp and Infrastructure (if needed)
 RUN dotnet restore
 
-RUN dotnet tool install dotnet-ef --version 8.0.0 --local
 
 # Set the working directory to VehicleRegistration.WebAPI and apply database migrations
 WORKDIR /app/VehicleRegistration.WebAPI

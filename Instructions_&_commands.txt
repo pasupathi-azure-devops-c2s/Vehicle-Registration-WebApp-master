@@ -1,4 +1,19 @@
-git clone https://github.com/pasupathi-azure-devops-c2s/Vehicle-Registration-WebApp-master.git
+Project initial and docker build commands:
 
-cd Vehicle-Registration-WebApp-master
+    git clone https://github.com/pasupathi-azure-devops-c2s/Vehicle-Registration-WebApp-master.git
 
+    cd Vehicle-Registration-WebApp-master
+
+    docker build -t vehicle-web-app:latest .
+
+Project Deployment commands:
+
+    az login (if needed)
+
+    az login acr --name akscr01sample
+
+    docker tag vehicle-web-app:latest akscr01sample.azurecr.io/vehicle-web-app:latest
+
+    docker push akscr01sample.azurecr.io/vehicle-web-app:latest
+
+    kubectl apply -f deployment.yml
