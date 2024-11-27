@@ -13,12 +13,12 @@ RUN dotnet restore
 
 
 # Set the working directory to VehicleRegistration.WebAPI and apply database migrations
-WORKDIR /app/VehicleRegistration.WebAPI
-RUN dotnet ef database update --project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+#WORKDIR /app/VehicleRegistration.WebAPI
+#RUN dotnet ef database update --project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
 # Set the working directory back to /app and copy the rest of the application files into the container
-WORKDIR /app
-COPY . .
+#WORKDIR /app
+#COPY . .
 
 # Copy the rest of the application files into the container
 COPY . .
