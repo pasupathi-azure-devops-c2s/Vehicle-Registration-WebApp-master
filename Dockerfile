@@ -16,7 +16,11 @@ RUN dotnet restore
 
 RUN dotnet tool install --global dotnet-ef --version 8.0.0
 
+RUN cd VehicleRegistration.WebAPI
+
 RUN dotnet ef database update
+
+RUN cd ..
 # Copy the rest of the application files into the container
 COPY . .
 
