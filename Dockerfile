@@ -17,7 +17,7 @@ RUN dotnet new tool-manifest
 RUN dotnet tool install dotnet-ef --local
 
 # Apply database migrations using the locally installed EF tool
-RUN dotnet-ef database update --project /app/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj
+RUN ./dotnet-tools/.store/dotnet-ef/8.0.0/tools/net8.0/dotnet ef database update --project /app/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj
 
 # Build the application in Release mode
 RUN dotnet build -c Release
