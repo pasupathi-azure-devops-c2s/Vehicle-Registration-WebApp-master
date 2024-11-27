@@ -14,9 +14,12 @@ COPY VehicleRegistration.Manager/VehicleRegistration.Manager.csproj ./VehicleReg
 # Restore all dependencies
 RUN dotnet restore
 
+# Install the Entity Framework Core tools globally
 RUN dotnet tool install --global dotnet-ef --version 8.0.0
 
+# Add the .NET tools to the PATH
 ENV PATH="$PATH:/root/.dotnet/tools"
+
 # Copy the rest of the source code into the container
 COPY . .
 
