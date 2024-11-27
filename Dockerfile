@@ -5,12 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the solution file and restore the dependencies
-COPY VehicleRegistrationAppSolution.sln ./
-COPY VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj ./VehicleRegistration.WebAPI/
-COPY VehicleRegistration.Core/VehicleRegistration.Core.csproj ./VehicleRegistration.Core/
-COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj ./VehicleRegistration.Infrastructure/
-COPY VehicleRegistration.Manager/VehicleRegistration.Manager.csproj ./VehicleRegistration.Manager/
-
+COPY . ./
 # Restore all dependencies
 RUN dotnet restore
 
