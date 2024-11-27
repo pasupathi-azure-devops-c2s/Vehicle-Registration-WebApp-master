@@ -22,7 +22,7 @@ COPY . .
 WORKDIR /app/VehicleRegistration.WebAPI
 
 # Apply migrations to the database
-RUN dotnet ef database update --project /app/VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj --startup-project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+RUN dotnet ef database update --project /app/VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj --startup-project /app/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj
 
 # Build the application
 RUN dotnet build -c Release
