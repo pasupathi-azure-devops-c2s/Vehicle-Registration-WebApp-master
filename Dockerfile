@@ -7,18 +7,15 @@ WORKDIR /app
 # Copy the solution file and restore any dependencies (via NuGet)
 COPY . ./
 
-# Copy the necessary project files (WebApp, Infrastructure, etc.)
-#COPY VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj ./VehicleRegistrationWebApp/
-#COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj ./VehicleRegistration.Infrastructure/
 
 # Restore dependencies for both WebApp and Infrastructure (if needed)
 RUN dotnet restore
 
-RUN dotnet tool install --global dotnet-ef --version 8.0.0
+RUN dotnet tool install dotnet-ef --version 8.0.0 --local
 
 # Set the working directory to VehicleRegistration.WebAPI and apply database migrations
 WORKDIR /app/VehicleRegistration.WebAPI
-RUN dotnet ef database update
+RUN dotnet ef database update --project /app/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
 # Set the working directory back to /app and copy the rest of the application files into the container
 WORKDIR /app
