@@ -1,17 +1,35 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Use the official .NET SDK image to build the app
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
-WORKDIR /WebAPI
+# Set the working directory in the container
+WORKDIR /app
 
-COPY . ./
+# Copy the .csproj files for all necessary projects
+COPY VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj VehicleRegistration.WebAPI/
+COPY VehicleRegistration.Core/VehicleRegistration.Core.csproj VehicleRegistration.Core/
+COPY VehicleRegistration.Manager/VehicleRegistration.Manager.csproj VehicleRegistration.Manager/
+COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj VehicleRegistration.Infrastructure/
 
-WORKDIR /
+# Restore the dependencies (this includes Core, Manager, Infrastructure)
+RUN dotnet restore VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
-RUN dotnet restore
+# Copy all the source code files
+COPY . .
 
-RUN dotnet publish -c Release -o /WebAPI/out
+# Publish the app to a folder in the container
+RUN dotnet publish VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj -c Release -o /app/publish
 
+# Use the official .NET runtime image to run the app
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+
+# Set the working directory in the runtime container
+WORKDIR /app
+
+# Copy the published app from the build container
+COPY --from=build /app/publish .
+
+# Expose the port the app will run on
 EXPOSE 7095
 
-ENTRYPOINT [ "dotnet", "/WebAPI/out/VehicleRegistration_WebAPI.dll" ]
-
-
+# Set the entry point to the web API
+ENTRYPOINT ["dotnet", "VehicleRegistration.WebAPI.dll"]
