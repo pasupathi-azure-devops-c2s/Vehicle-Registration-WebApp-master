@@ -4,11 +4,6 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the .csproj files for all necessary projects
-COPY VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj VehicleRegistration.WebAPI/
-COPY VehicleRegistration.Core/VehicleRegistration.Core.csproj VehicleRegistration.Core/
-COPY VehicleRegistration.Manager/VehicleRegistration.Manager.csproj VehicleRegistration.Manager/
-COPY VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj VehicleRegistration.Infrastructure/
 
 # Restore the dependencies (this includes Core, Manager, Infrastructure)
 RUN dotnet restore VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
