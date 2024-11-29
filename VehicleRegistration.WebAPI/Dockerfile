@@ -6,7 +6,7 @@ WORKDIR /app
 
 
 # Restore the dependencies (this includes Core, Manager, Infrastructure)
-RUN dotnet restore VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+RUN dotnet restore 
 
 
 RUN dotnet tool install --global dotnet-ef --version 9.0.0
