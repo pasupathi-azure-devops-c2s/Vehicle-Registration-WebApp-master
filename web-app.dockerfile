@@ -4,11 +4,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy the VehicleRegistration.WebApp project file and restore dependencies
-COPY ["VehicleRegistration.WebApp/VehicleRegistrationWebApp.csproj", "VehicleRegistration.WebApp/"]
+COPY ["VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj", "VehicleRegistration.WebAPI/"]
 COPY ["VehicleRegistration.Core/VehicleRegistration.Core.csproj", "VehicleRegistration.Core/"]
 COPY ["VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj", "VehicleRegistration.Infrastructure/"]
 COPY ["VehicleRegistration.Manager/VehicleRegistration.Manager.csproj", "VehicleRegistration.Manager/"]
-
+COPY ["VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj", "VehicleRegistrationWebApp/"]
 # Restore the NuGet packages
 RUN dotnet restore "VehicleRegistration.WebApp/VehicleRegistrationWebApp.csproj"
 
