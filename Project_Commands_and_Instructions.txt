@@ -8,21 +8,21 @@ Project backend deployment process:
 
     az acr login --name akscr01sample
 
-    docker build -t vehicle-web-api:latest . --file=Web-API.dockerfile    
+    docker build -t vehicle-web-api:latest . --file=eb-api.dockerfile    
     
     docker tag vehicle-web-api:latest akscr01sample.azurecr.io/vehicle-web-api:latest
 
     docker push akscr01sample.azurecr.io/vehicle-web-api:latest
 
-    kubectl apply -f Web-API-Deployment.yml
+    kubectl apply -f web-api-deployment.yml
 
 
 Project frontend deployment process:
 
-    docker build -t vehicle-web-app:latest . --file=Web-App.dockerfile
+    docker build -t vehicle-web-app:latest . --file=web-app.dockerfile
 
     docker tag vehicle-web-app:latest akscr01sample.azurecr.io/vehicle-web-app:latest
 
     docker push akscr01sample.azurecr.io/vehicle-web-app:latest
 
-    kubectl apply -f Web-App-Deployment.yml
+    kubectl apply -f web-app-deployment.yml
