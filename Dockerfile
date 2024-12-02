@@ -40,7 +40,7 @@ WORKDIR /app
 COPY --from=build /out .
 
 # Expose the port that the application will run on
-EXPOSE 7066
+EXPOSE 7095
 
 # Set the entry point for the container to run the web application
 ENTRYPOINT ["dotnet", "VehicleRegistrationWebAPI.dll"]
