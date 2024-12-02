@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vehicle-web-app
+  name: vehicle-web-api
 spec: 
   replicas: 1
   selector: 
     matchLabels:   # Corrected this field from marchLabels to matchLabels
-      app: vehicle-web-app
+      app: vehicle-web-api
   template:
     metadata:
       labels:
-        app: vehicle-web-app
+        app: vehicle-web-api
     spec:
       containers:
-        - name: vehicle-web-app
-          image: akscr01sample.azurecr.io/vehicle-web-app:latest
+        - name: vehicle-web-api
+          image: akscr01sample.azurecr.io/vehicle-web-api:latest
           ports:         # Corrected this field from 'port' to 'ports'
-            - containerPort: 7066    # Corrected from 'containet_port' to 'containerPort'
+            - containerPort: 7095    # Corrected from 'containet_port' to 'containerPort'
       imagePullSecrets:
         - name: acr-secret
 
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata: 
-  name: vehicle-web-app-service
+  name: vehicle-web-api-service
 spec:
   selector: 
-    app: vehicle-web-app
+    app: vehicle-web-api
   ports:
     - port: 80
-      targetPort: 7066
+      targetPort: 7095
   type: LoadBalancer
