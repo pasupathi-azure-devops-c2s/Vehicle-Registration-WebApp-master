@@ -19,10 +19,10 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 COPY . .
 
 # Set the working directory to the WebAPI project and run database migrations
-WORKDIR /app/VehicleRegistrationWebApp
+WORKDIR /app/VehicleRegistration.WebAPI
 
 # Apply migrations to the database
-RUN dotnet ef database update --project /app/VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj --startup-project /app/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj
+RUN dotnet ef database update 
 
 # Build the application
 RUN dotnet build -c Release
@@ -43,4 +43,4 @@ COPY --from=build /out .
 EXPOSE 7066
 
 # Set the entry point for the container to run the web application
-ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll"]
+ENTRYPOINT ["dotnet", "VehicleRegistrationWebAPI.dll"]

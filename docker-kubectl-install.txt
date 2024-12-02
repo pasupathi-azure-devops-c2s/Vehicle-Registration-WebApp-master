@@ -1,0 +1,86 @@
+1. docker install on ubuntu
+
+sudo apt update && sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+sudo apt install docker-ce -y
+
+sudo systemctl status docker
+
+sudo usermod -aG docker $USER && newgrp docker
+
+2. kubectl install on ubuntu
+
+sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl
+
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/kubernetes-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt update
+
+sudo apt install -y kubectl
+
+(or) 
+
+sudo snap install kubectl --classic
+
+3. Install AZ-CLI on ubuntu
+
+sudo apt update
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+4. Install Docker Compose on Ubuntu
+
+sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+
+
+Steps to deploy the project:
+
+1. Docker image build
+
+git clone https://github.com/pasupathi-azure-devops-c2s/Banking-Web-Prage-ASP.git
+    
+cd Banking-Web-Prage-ASP
+
+docker build -t bankapp:latest .
+
+
+2. Docker image push
+
+az login #Based on the requirement. 
+
+docker tag bankapp:latest akscr01sample.azurecr.io/bankapp:latest
+
+
+az acr login --name akscr01sample
+
+docker push akscr01sample.azurecr.io/bankapp:latest
+
+
+
+3. Deploy the project to kubernetes
+
+az aks get-credentials --resource-group AKS-Cluster-RG --name aks-cluster-pasupathikumar
+
+kubectl create secret docker-registry acr-secret --docker-server=aksacr01sample.azurecr.io --docker-username=Pasupathikumar --docker-password=NewPassword1234 --docker-email=kumarmarimuthu99@gmail.com
+
+
+kubectl apply -f bankapp.yml
+
+4. Delete the docker images and kubernetes credentials
+
+docker system prune -af
+
+kubectl config get-contexts
+
+kubectl config delete-context aks-cluster-pasupathikumar
