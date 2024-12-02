@@ -31,7 +31,6 @@ Vehicle Registration Web Application
     |-- Middleware
     |-- obj
     |-- Properties
-    |Dockerfile
     |appsettings.Development.json
     |appsettings.json
     |Program.cs
@@ -55,7 +54,6 @@ Vehicle Registration Web Application
     |-- Services
     |-- Views
     |-- wwwroot
-    |Dockerfile
     |appsettings.Development.json
     |appsettings.json
     |Program.cs
@@ -65,4 +63,7 @@ Vehicle Registration Web Application
 |application.yml #Application Manifest file
 |README.md
 |VehicleRegisrtationAppSolution.sln
-
+|web-api.dockerfile
+|web-app.dockerfile
+|web-app-deployment.yml
+|web-api-deployment.yml

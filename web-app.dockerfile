@@ -1,29 +1,34 @@
-# Stage 1: Build stage
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Use the official .NET SDK image for building
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
-# Set the working directory in the container
-WORKDIR /VehicleRegistrationWebApp
+WORKDIR /src
 
-# Copy all the files into the container
+# Copy the VehicleRegistration.WebApp project file and restore dependencies
+COPY ["VehicleRegistration.WebApp/VehicleRegistrationWebApp.csproj", "VehicleRegistration.WebApp/"]
+COPY ["VehicleRegistration.Core/VehicleRegistration.Core.csproj", "VehicleRegistration.Core/"]
+COPY ["VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj", "VehicleRegistration.Infrastructure/"]
+COPY ["VehicleRegistration.Manager/VehicleRegistration.Manager.csproj", "VehicleRegistration.Manager/"]
+
+# Restore the NuGet packages
+RUN dotnet restore "VehicleRegistration.WebApp/VehicleRegistrationWebApp.csproj"
+
+# Copy the rest of the code
 COPY . .
 
-# Restore the dependencies
-RUN dotnet restore
+# Set the working directory to the web app project and build it
+WORKDIR /src/VehicleRegistration.WebApp
+RUN dotnet build "VehicleRegistrationWebApp.csproj" -c Release -o /app/build
 
-# Publish the application to the /WebApp/out directory
-RUN dotnet publish -c Release -o /WebApp/out
+# Publish the application to a folder for the runtime
+RUN dotnet publish "VehicleRegistrationWebApp.csproj" -c Release -o /app/publish
 
-# Stage 2: Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-
-# Set the working directory for the app in the container
+# Use the .NET runtime image for the final stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-
-# Copy the published app from the build container
-COPY --from=build /WebApp/out .
-
-# Expose port 7066 for the application
 EXPOSE 7066
 
-# Set the entry point to run the app
-ENTRYPOINT ["dotnet", "VehicleRegistration_WebApp.dll"]
+# Copy the published application from the build stage
+COPY --from=build /app/publish .
+
+# Set the entry point to run the Web App
+ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll"]

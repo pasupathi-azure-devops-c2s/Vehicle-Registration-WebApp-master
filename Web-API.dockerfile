@@ -1,46 +1,34 @@
-# Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Use the official .NET SDK image for building
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
-# Set the working directory in the container
-WORKDIR /app
+WORKDIR /src
 
-# Copy the solution file and restore the dependencies
-COPY . ./
-# Restore all dependencies
-RUN dotnet restore
+# Copy the VehicleRegistration.WebAPI project file and restore dependencies
+COPY ["VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj", "VehicleRegistration.WebAPI/"]
+COPY ["VehicleRegistration.Core/VehicleRegistration.Core.csproj", "VehicleRegistration.Core/"]
+COPY ["VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj", "VehicleRegistration.Infrastructure/"]
+COPY ["VehicleRegistration.Manager/VehicleRegistration.Manager.csproj", "VehicleRegistration.Manager/"]
 
-# Install the Entity Framework Core tools globally
-RUN dotnet tool install --global dotnet-ef --version 9.0.0
+# Restore the NuGet packages
+RUN dotnet restore "VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj"
 
-# Add the .NET tools to the PATH
-ENV PATH="$PATH:/root/.dotnet/tools"
-
-# Copy the rest of the source code into the container
+# Copy the rest of the code
 COPY . .
 
-# Set the working directory to the WebAPI project and run database migrations
-WORKDIR /app/VehicleRegistration.WebAPI
+# Set the working directory to the web API project and build it
+WORKDIR /src/VehicleRegistration.WebAPI
+RUN dotnet build "VehicleRegistration.WebAPI.csproj" -c Release -o /app/build
 
-# Apply migrations to the database
-RUN dotnet ef database update 
+# Publish the application to a folder for the runtime
+RUN dotnet publish "VehicleRegistration.WebAPI.csproj" -c Release -o /app/publish
 
-# Build the application
-RUN dotnet build -c Release
-
-# Publish the application to the /out directory
-RUN dotnet publish -c Release -o /out
-
-# Stage 2: Runtime (Final image for running the app)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-
-# Set the working directory for the app in the final container
+# Use the .NET runtime image for the final stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-
-# Copy the published app from the build container
-COPY --from=build /out .
-
-# Expose the port that the application will run on
 EXPOSE 7095
 
-# Set the entry point for the container to run the web application
-ENTRYPOINT ["dotnet", "VehicleRegistrationWebAPI.dll"]
+# Copy the published application from the build stage
+COPY --from=build /app/publish .
+
+# Set the entry point to run the Web API
+ENTRYPOINT ["dotnet", "VehicleRegistration.WebAPI.dll"]
