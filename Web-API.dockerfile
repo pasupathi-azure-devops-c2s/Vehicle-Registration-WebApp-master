@@ -8,6 +8,7 @@ COPY ["VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj", "VehicleRe
 COPY ["VehicleRegistration.Core/VehicleRegistration.Core.csproj", "VehicleRegistration.Core/"]
 COPY ["VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj", "VehicleRegistration.Infrastructure/"]
 COPY ["VehicleRegistration.Manager/VehicleRegistration.Manager.csproj", "VehicleRegistration.Manager/"]
+COPY ["VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj", "VehicleRegistrationWebApp/"]
 
 # Restore the NuGet packages
 RUN dotnet restore "VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj"
