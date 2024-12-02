@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata: 
-  name: vehicle-web-api-service
+  name: vehicle-web-app-service
 spec:
   selector: 
     app: vehicle-web-app

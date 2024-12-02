@@ -19,7 +19,7 @@ Project backend deployment process:
 
 Project frontend deployment process:
 
-    docker build -t vehicle-web-app:latest .
+    docker build -t vehicle-web-app:latest . --file=web-app.dockerfile
 
     docker tag vehicle-web-app:latest akscr01sample.azurecr.io/vehicle-web-app:latest
 
