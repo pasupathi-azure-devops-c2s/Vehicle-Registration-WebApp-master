@@ -8,7 +8,7 @@ Project backend deployment process:
 
     az acr login --name akscr01sample
 
-    docker build -t vehicle-web-api:latest . --file=eb-api.dockerfile    
+    docker build -t vehicle-web-api:latest . --file=Web-API.dockerfile    
     
     docker tag vehicle-web-api:latest akscr01sample.azurecr.io/vehicle-web-api:latest
 
