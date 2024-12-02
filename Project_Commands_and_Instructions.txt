@@ -4,12 +4,12 @@ Project backend deployment process:
 
     cd Vehicle-Registration-WebApp-master
 
-    docker build -t vehicle-web-api:latest . --file=Web-API.dockerfile
-    
     az login (if needed)
 
     az acr login --name akscr01sample
 
+    docker build -t vehicle-web-api:latest . --file=Web-API.dockerfile    
+    
     docker tag vehicle-web-api:latest akscr01sample.azurecr.io/vehicle-web-api:latest
 
     docker push akscr01sample.azurecr.io/vehicle-web-api:latest
