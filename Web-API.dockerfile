@@ -1,5 +1,5 @@
 # Use the official .NET SDK image for building
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
@@ -23,7 +23,7 @@ RUN dotnet build "VehicleRegistration.WebAPI.csproj" -c Release -o /app/build
 RUN dotnet publish "VehicleRegistration.WebAPI.csproj" -c Release -o /app/publish
 
 # Use the .NET runtime image for the final stage
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 7095
 
