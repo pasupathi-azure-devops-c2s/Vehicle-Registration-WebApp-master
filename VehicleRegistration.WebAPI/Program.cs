@@ -119,7 +119,7 @@ namespace VehicleRegistration.WebAPI
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseRouting();
-            app.UseCors();
+            app.UseCors("AllowSpecificOrigins");
             //app.UseAuthentication();
             app.UseMiddleware<AuthorizationMiddleware>();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
