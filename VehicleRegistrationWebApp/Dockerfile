@@ -8,10 +8,6 @@ WORKDIR /
 
 RUN dotnet restore
 
-RUN dotnet tool install --global dotnet-ef --version 9.0.0
-
-RUN dotnet ef database update
-
 RUN dotnet publish -c Release -o /WebApp/out
 
 EXPOSE 7066
