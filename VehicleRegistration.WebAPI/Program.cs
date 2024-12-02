@@ -103,14 +103,14 @@ namespace VehicleRegistration.WebAPI
             builder.Services.AddSingleton<IJwtService, JwtService>();
 
             // Enabling Cors 
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(policybuilder =>
-                {
-                    policybuilder.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string>())
-                    .WithMethods("GET","POST","PUT","DELETE","PATCH");
-                });
-            });
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(policybuilder =>
+            //    {
+            //        policybuilder.WithOrigins(builder.Configuration["AllowedOrigins"])
+            //        .WithMethods("GET","POST","PUT","DELETE","PATCH");
+            //    });
+            //});
             
             var app = builder.Build();
 
@@ -119,7 +119,7 @@ namespace VehicleRegistration.WebAPI
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseRouting();
-            app.UseCors("AllowSpecificOrigins");
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //app.UseAuthentication();
             app.UseMiddleware<AuthorizationMiddleware>();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
