@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vehicle-web-api
-spec: 
+spec:
   replicas: 1
-  selector: 
-    matchLabels:   # Corrected this field from marchLabels to matchLabels
+  selector:
+    matchLabels:
       app: vehicle-web-api
   template:
     metadata:
@@ -15,8 +15,35 @@ spec:
       containers:
         - name: vehicle-web-api
           image: akscr01sample.azurecr.io/vehicle-web-api:latest
-          ports:         # Corrected this field from 'port' to 'ports'
-            - containerPort: 7095    # Corrected from 'containet_port' to 'containerPort'
+          ports:
+            - containerPort: 7095
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: db-connection-string
+                  key: DefaultConnection
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 7095
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 7095
+            initialDelaySeconds: 15
+            periodSeconds: 20
       imagePullSecrets:
         - name: acr-secret
 
@@ -24,10 +51,10 @@ spec:
 
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: vehicle-web-api-service
 spec:
-  selector: 
+  selector:
     app: vehicle-web-api
   ports:
     - port: 80
