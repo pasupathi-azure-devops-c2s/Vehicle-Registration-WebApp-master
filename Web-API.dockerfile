@@ -29,7 +29,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 
 # Expose the necessary port (make sure the Web API listens on this port)
-EXPOSE 7095
+EXPOSE 7095/swagger/index.html
 
 # Copy the built and published application from the build stage
 COPY --from=build /app/publish .

@@ -127,7 +127,7 @@ namespace VehicleRegistration.WebAPI
             
             app.MapControllers();
 
-            app.Run("*");
+            app.Run();
         }
     }
 }

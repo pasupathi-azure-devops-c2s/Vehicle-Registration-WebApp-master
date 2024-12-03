@@ -16,7 +16,7 @@ RUN dotnet restore "VehicleRegistration.WebApp/VehicleRegistrationWebApp.csproj"
 COPY . .
 
 # Set the working directory to the web app project and build it
-WORKDIR /src/VehicleRegistration.WebApp
+WORKDIR /VehicleRegistrationWebApp
 RUN dotnet build "VehicleRegistrationWebApp.csproj" -c Release -o /app/build
 
 # Publish the application to a folder for the runtime

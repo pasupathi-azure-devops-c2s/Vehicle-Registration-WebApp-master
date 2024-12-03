@@ -26,3 +26,6 @@ Project frontend deployment process:
     docker push akscr01sample.azurecr.io/vehicle-web-app:latest
 
     kubectl apply -f web-app-deployment.yml
+
+
+api url: http://52.66.253.151:7095/swagger/index.html
