@@ -20,11 +20,8 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: "Production"
-            - name: ConnectionStrings__DefaultConnection
-              valueFrom:
-                secretKeyRef:
-                  name: db-connection-string
-                  key: DefaultConnection
+            - name: ConnectionStrings__Default
+              value: "Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
           resources:
             requests:
               memory: "512Mi"
