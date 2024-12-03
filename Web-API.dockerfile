@@ -7,13 +7,13 @@ COPY . ./Vehicle-Web-App
 # Restore the dependencies for the VehicleRegistration.WebAPI project
 RUN dotnet restore ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
-# Install the .NET EF CLI tool (needed for database migrations)
-RUN dotnet tool install --global dotnet-ef
+# Install the .NET EF CLI tool (Make sure this is done in the context of your project)
+WORKDIR /Vehicle-Web-App/VehicleRegistration.WebAPI
 
-# Apply database migrations using EF Core (Ensure this command is relevant to your app setup)
-RUN dotnet ef database update --project ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+# Apply database migrations using EF Core
+RUN dotnet ef database update
 
-# Build the application in release mode and output to /app/publish directory
+# Publish the application
 RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj --configuration Release --output /app/publish
 
 # Use the official .NET runtime image for running the application
