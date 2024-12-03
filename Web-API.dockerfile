@@ -15,7 +15,7 @@ RUN dotnet tool install --global dotnet-ef --version 9.0.0
 ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Apply database migrations using EF Core (Ensure this command is relevant to your app setup)
-RUN dotnet ef database update --project ./Vehicle-Web-App
+RUN dotnet ef database update --project ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
 # Build the application in release mode and output to /app/publish directory
 RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj --configuration Release --output /app/publish
