@@ -26,4 +26,4 @@ WORKDIR /app
 EXPOSE 7066
 
 # Command to run the application
-CMD ["dotnet", "run", "VehicleRegistrationWebApp.dll"]
+CMD ["dotnet", "VehicleRegistrationWebApp.dll"]
