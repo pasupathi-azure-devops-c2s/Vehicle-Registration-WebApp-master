@@ -22,6 +22,8 @@ RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistrat
 # Use the official .NET runtime image for running the application
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
+ENV ConnectionStrings__Default="Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
 # Copy the published application from the build stage into the runtime container
 COPY --from=build /app/publish /app
 ENV ASPNETCORE_URLS=http://+:7095
