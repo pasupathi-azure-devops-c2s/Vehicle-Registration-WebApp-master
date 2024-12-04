@@ -35,4 +35,4 @@ WORKDIR /app
 EXPOSE 7095
 
 # Define the entry point to run the application on http://0.0.0.0:7095
-CMD ["dotnet", "VehicleRegistration.WebAPI.dll", "--urls", "http://0.0.0.0:7095"]
+ENTRYPOINT  ["dotnet", "VehicleRegistration.WebAPI.dll"]
