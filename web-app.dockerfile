@@ -1,7 +1,7 @@
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-COPY . ./Vehicle-Web-App
+COPY . ./app/Vehicle-Web-App
 
 RUN dotnet restore ./Vehicle-Web-App
 
