@@ -12,9 +12,9 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 
 RUN dotnet dev-certs https --trust
 
-RUN dotnet ef database update --project ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
+RUN dotnet ef database update --project ./app/Vehicle-Web-Api/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
-RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj --configuration Release --output /app/publish
+RUN dotnet publish ./app/Vehicle-Web-Api/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj --configuration Release --output /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 

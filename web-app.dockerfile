@@ -5,7 +5,7 @@ COPY . ./app/Vehicle-Web-App
 
 RUN dotnet restore ./app/Vehicle-Web-App
 
-RUN dotnet publish ./Vehicle-Web-App/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj --configuration Release --output /app/publish
+RUN dotnet publish ./app/Vehicle-Web-App/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj --configuration Release --output /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
