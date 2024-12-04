@@ -23,7 +23,7 @@ RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistrat
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 ENV ConnectionStrings__Default="Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-
+ENV Jwt__Key="ab56ufuifywduwd76rGiri7H6uyfivbiNIOUGIUFriouhioud9p9"
 # Copy the published application from the build stage into the runtime container
 COPY --from=build /app/publish /app
 ENV ASPNETCORE_URLS=http://+:7095
