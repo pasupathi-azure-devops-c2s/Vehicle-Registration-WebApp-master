@@ -14,6 +14,10 @@ Project backend deployment process:
 
     docker push akscr01sample.azurecr.io/vehicle-web-api:latest
 
+    az aks get-credentials --resource-group AKS-Cluster-RG --name aks-cluster-pasupathikumar
+
+    kubectl create secret docker-registry acr-secret --docker-server=aksacr01sample.azurecr.io --docker-username=Pasupathikumar --docker-password=NewPassword1234 --docker-email=kumarmarimuthu99@gmail.com
+
     kubectl apply -f web-api-deployment.yml
 
 
@@ -28,4 +32,4 @@ Project frontend deployment process:
     kubectl apply -f web-app-deployment.yml
 
 
-api url:    
+api url: http://localhost:7095/swagger/index.html
