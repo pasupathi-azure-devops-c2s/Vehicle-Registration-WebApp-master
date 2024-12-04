@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 COPY . ./app/Vehicle-Web-App
 
-RUN dotnet restore ./Vehicle-Web-App
+RUN dotnet restore ./app/Vehicle-Web-App
 
 RUN dotnet publish ./Vehicle-Web-App/VehicleRegistrationWebApp/VehicleRegistrationWebApp.csproj --configuration Release --output /app/publish
 

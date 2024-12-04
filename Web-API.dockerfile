@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 COPY . ./app/Vehicle-Web-Api
 
-RUN dotnet restore ./Vehicle-Web-App
+RUN dotnet restore ./app/Vehicle-Web-Api
 
 RUN dotnet tool install --global dotnet-ef --version 9.0.0
 
