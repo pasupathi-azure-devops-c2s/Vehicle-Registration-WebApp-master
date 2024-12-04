@@ -30,6 +30,6 @@ spec:
   selector: 
     app: vehicle-web-app
   ports:
-    - port: 80
+    - port: 7066
       targetPort: 7066
   type: LoadBalancer
