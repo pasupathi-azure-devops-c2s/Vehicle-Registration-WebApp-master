@@ -22,7 +22,7 @@ COPY --from=build /app/publish /app
 ENV ASPNETCORE_URLS=http://+:7095
 
 WORKDIR /app
-
+RUN dotnet dev-certs https --trust
 EXPOSE 7095
 
 ENTRYPOINT  ["dotnet", "VehicleRegistration.WebAPI.dll"]
