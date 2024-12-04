@@ -9,6 +9,9 @@ RUN dotnet tool install --global dotnet-ef --version 9.0.0
 
 ENV PATH="$PATH:/root/.dotnet/tools"
 
+
+RUN dotnet dev-certs https --trust
+
 RUN dotnet ef database update --project ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj
 
 RUN dotnet publish ./Vehicle-Web-App/VehicleRegistration.WebAPI/VehicleRegistration.WebAPI.csproj --configuration Release --output /app/publish
@@ -22,7 +25,6 @@ COPY --from=build /app/publish /app
 ENV ASPNETCORE_URLS=http://+:7095
 
 WORKDIR /app
-RUN dotnet dev-certs https --trust
 EXPOSE 7095
 
 ENTRYPOINT  ["dotnet", "VehicleRegistration.WebAPI.dll"]
