@@ -15,4 +15,4 @@ WORKDIR /app
 
 EXPOSE 7066
 
-CMD ["dotnet", "VehicleRegistrationWebApp.dll", "--urls", "http://0.0.0.0:7066"]
+ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll"]
