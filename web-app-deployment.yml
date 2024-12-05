@@ -17,6 +17,9 @@ spec:
           image: akscr01sample.azurecr.io/vehicle-web-app:latest
           ports:         # Corrected this field from 'port' to 'ports'
             - containerPort: 7066    # Corrected from 'containet_port' to 'containerPort'
+          env:
+             - name: ApiBaseAddress
+               value: ""
       imagePullSecrets:
         - name: acr-secret
 

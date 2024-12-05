@@ -57,3 +57,29 @@ spec:
     - port: 7095
       targetPort: 7095
   type: LoadBalancer
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-specific-ingress
+  namespace: default  # Use the appropriate namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: vehicle-web-api  # Apply this policy to pods labeled with app=vehicle-web-api
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: vehicle-web-app  # Only allow traffic from pods with label app=vehicle-web-app
+      ports:
+        - protocol: TCP
+          port: 7095  # Allow traffic on port 7095 (HTTP API)
+  egress:
+    - to:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 7095  # Allow egress traffic to port 80
