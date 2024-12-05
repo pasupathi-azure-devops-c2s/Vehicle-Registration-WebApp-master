@@ -20,27 +20,12 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: "Production"
+            - name: ASPNETCORE_URLS
+              value: "http://+:7095"
+            - name: Jwt__Key
+              value: "ab56ufuifywduwd76rGiri7H6uyfivbiNIOUGIUFriouhioud9p9"
             - name: ConnectionStrings__Default
-              value: "Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-          resources:
-            requests:
-              memory: "512Mi"
-              cpu: "500m"
-            limits:
-              memory: "1Gi"
-              cpu: "1"
-          readinessProbe:
-            httpGet:
-              path: /swagger/index.html
-              port: 7095
-            initialDelaySeconds: 10
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /swagger/index.html
-              port: 7095
-            initialDelaySeconds: 15
-            periodSeconds: 20
+              value: "Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"  
       imagePullSecrets:
         - name: acr-secret
 
@@ -58,28 +43,3 @@ spec:
       targetPort: 7095
   type: LoadBalancer
 
----
-
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-specific-ingress
-  namespace: default  # Use the appropriate namespace
-spec:
-  podSelector:
-    matchLabels:
-      app: vehicle-web-api  # Apply this policy to pods labeled with app=vehicle-web-api
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app: vehicle-web-app  # Only allow traffic from pods with label app=vehicle-web-app
-      ports:
-        - protocol: TCP
-          port: 7095  # Allow traffic on port 7095 (HTTP API)
-  egress:
-    - to:
-        - podSelector: {}
-      ports:
-        - protocol: TCP
-          port: 7095  # Allow egress traffic to port 80
