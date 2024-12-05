@@ -68,4 +68,3 @@ Vehicle Registration Web Application
 |web-app-deployment.yml
 |web-api-deployment.yml
 
-Vehicle-Registration-WebApp-master\VehicleRegistrationWebApp

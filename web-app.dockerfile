@@ -11,6 +11,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 COPY --from=build /app/publish /app
 
+ENV ApiBaseAddress="http://13.201.189.196:7095/"
+
 WORKDIR /app
 
 EXPOSE 7066
