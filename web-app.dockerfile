@@ -13,8 +13,10 @@ COPY --from=build /app/publish /app
 
 ENV ApiBaseAddress="http://3.110.56.89:7095/"
 
+ENV ASPNETCORE_URLS=http://+:7066
+
 WORKDIR /app
 
 EXPOSE 7066
 
-ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll", "--urls", "http://0.0.0.0:7066"]
+ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll"]
