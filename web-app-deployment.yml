@@ -20,6 +20,8 @@ spec:
           env:
              - name: ApiBaseAddress
                value: ""
+             - name: ASPNETCORE_URLS
+               value: "http://+:7066"
       imagePullSecrets:
         - name: acr-secret
 
