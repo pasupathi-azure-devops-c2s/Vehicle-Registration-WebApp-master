@@ -25,10 +25,21 @@ spec:
             - name: Jwt__Key
               value: "ab56ufuifywduwd76rGiri7H6uyfivbiNIOUGIUFriouhioud9p9"
             - name: ConnectionStrings__Default
-              value: "Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"  
+              value: "Server=tcp:sqldbserver8199.database.windows.net,1433;Initial Catalog=ASP_NET_Database;Persist Security Info=False;User ID=Pasupathikumar;Password=NewPassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+          readinessProbe:
+            httpGet:
+              path: /swagger/index.html
+              port: 7095
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /swagger/index.html
+              port: 7095
+            initialDelaySeconds: 15
+            periodSeconds: 20
       imagePullSecrets:
         - name: acr-secret
-
 ---
 
 apiVersion: v1
