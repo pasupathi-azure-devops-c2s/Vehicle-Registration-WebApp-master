@@ -11,10 +11,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 COPY --from=build /app/publish /app
 
-ENV ApiBaseAddress="http://3.110.56.89:7095/swagger/index.html"
+ENV ApiBaseAddress="http://3.110.56.89:7095/"
 
 WORKDIR /app
 
 EXPOSE 7066
 
-ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll", "--urls", "http://0.0.0.0:7066"]
+ENTRYPOINT ["dotnet", "VehicleRegistrationWebApp.dll"]
