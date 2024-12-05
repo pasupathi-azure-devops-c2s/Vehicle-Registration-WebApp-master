@@ -32,4 +32,19 @@ Project frontend deployment process:
     kubectl apply -f web-app-deployment.yml
 
 
+delete commands:
+
+    az acr repository delete --name akscr01sample --image vehicle-web-api:latest --yes
+
+    az acr repository delete --name akscr01sample --image vehicle-web-app:latest --yes
+
+    kubectl delete -f web-api-deployment.yml
+
+    kubectl delete -f web-app-deployment.yml
+
+
+Others:
+
+
 api url: http://localhost:7095/swagger/index.html
+

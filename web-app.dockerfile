@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 COPY --from=build /app/publish /app
 
-ENV ApiBaseAddress="http://3.110.56.89:7095/"
+ENV ApiBaseAddress="http://4.156.73.76:7095/"
 
 ENV ASPNETCORE_URLS=http://+:7066
 
