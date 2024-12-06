@@ -47,4 +47,3 @@ Others:
 
 
 api url: http://localhost:7095/swagger/index.html
-

@@ -19,7 +19,7 @@ spec:
             - containerPort: 7066    # Corrected from 'containet_port' to 'containerPort'
           env:
              - name: ApiBaseAddress
-               value: "http://4.156.73.76:7095/"
+               value: "http://172.212.38.65:7095/"
              - name: ASPNETCORE_URLS
                value: "http://+:7066"
       imagePullSecrets:
